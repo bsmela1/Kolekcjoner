@@ -15,7 +15,7 @@
 
 <nav>
     <a href="https://ih1.redbubble.net/image.1533663591.5353/ssrco,classic_tee,mens,fafafa:ca443f4786,front_alt,square_product,600x600.jpg">
-        <img id="site-icon" src="unabomber.jpg"  width="100px" height="100px">
+        <img id="site-icon" src="pictures/unabomber.jpg"  width="100px" height="100px">
     </a>
     <ul id="menu">
         <li>
@@ -26,7 +26,7 @@
         </li>
     </ul>
     <a id="login-button" href="login.php">
-        <img src="logout_icon.jpg" alt="logout" width="55px" height="55px">
+        <img src="pictures/logout_icon.jpg" alt="logout" width="55px" height="55px">
     </a>
 </nav>
 
