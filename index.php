@@ -1,23 +1,19 @@
-<?php
-//strona glowna, z logowaniem
-if (isset($_POST['login'])&&isset($_POST['password'])) {
-    $username =$_POST['login'];
-    $password = sha1(sha1($_POST['password']));
-
-    require_once __DIR__ . '/vendor/autoload.php';
-    $client = new MongoDB\Client(
-        'mongodb+srv://admin:qQ2fczxXFqCODj3V@cluster0.ggdvz4i.mongodb.net/?retryWrites=true&w=majority'
-    );
-    $collection = $client->kolekcjoner->users;
-    $document= $collection->findOne([
-        'username'=>$username]);
-    if ($document!="") {
-        if (($document['username'] == $username) && ($document['password'] == $password)) {
-            echo "Witaj " . $username;
-        } else {
-            echo "Błąd logowania. Spróbuj jeszcze raz.";
-        }
-    }else{
-        echo "Taki użutkownik nie istnieje";
-    }
-}
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zaloguj się do kolekcjonera</title>
+    <link rel="stylesheet" href="style_sign_up_in.css">
+</head>
+<body>
+<form action="collections.php" method="post">
+    <h2>Zaloguj się do kolekcjonera</h2>
+    <label>Login</label><input name="login" type="text">
+    <label>Hasło</label><input name="password" type="password">
+    <input id="submit_input" type="submit" value="Zaloguj się">
+    <a href="signUp.php">Utwórz konto</a>
+</form>
+</body>
+</html>
