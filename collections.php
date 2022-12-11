@@ -15,10 +15,10 @@ if (isset($_POST['login'])&&isset($_POST['password'])) {
         if (($document['username'] == $username) && ($document['password'] == $password)) {
             echo "Witaj " . $username;
         } else {
-            echo "Błąd logowania. Spróbuj jeszcze raz.";
+            echo "Błąd logowania. <a href='index.php'>Spróbuj jeszcze raz.</a>";
         }
     }else{
-        echo "Taki użutkownik nie istnieje";
+        echo "Taki użytkownik nie istnieje<a href='signUp.php'>Przejdź do rejestracji</a><a href='index.php'>Przejdź do logowania</a>";
     }
 }
 ?>
