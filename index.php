@@ -17,16 +17,14 @@
     <a href="https://ih1.redbubble.net/image.1533663591.5353/ssrco,classic_tee,mens,fafafa:ca443f4786,front_alt,square_product,600x600.jpg">
         <img id="site-icon" src="pictures/unabomber.jpg"  width="100px" height="100px">
     </a>
-    <ul id="menu">
-        <li>
-            <a href="kolekcje.php"><h2>kolekcje.</h2></a>
-        </li>
-        <li>
-            <h2>wstaw nowy item.</h2>
-        </li>
-    </ul>
-    <a id="login-button" href="login.php">
-        <img src="pictures/logout_icon.jpg" alt="logout" width="55px" height="55px">
+
+    <section id="menu">
+        <a href="kolekcje.php"><h2>kolekcje.</h2></a>
+        <a href="add_item.php"><h2>wstaw nowy item.</h2></a>
+    </section>
+
+    <a id="logout-button" href="logout.php">
+        <img id="logout-img" src="pictures/logout_icon.png" alt="logout">
     </a>
 </nav>
 
