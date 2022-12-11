@@ -14,16 +14,16 @@ if (isset($_POST['login'])&&isset($_POST['password'])) {
     $document= $collection->findOne([
         'username'=>$username]);
     if ($document!="") {
+        $user_id=$document['_id'];
         if (($document['username'] == $username) && ($document['password'] == $password)) {
-            //echo "Witaj " . $username;
+            echo "Witaj " . $username;
         } else {
-            //echo "Błąd logowania. Spróbuj jeszcze raz.";
+            echo "Błąd logowania. Spróbuj jeszcze raz.";
         }
     }else{
-        //echo "Taki użutkownik nie istnieje";
+        echo "Taki użytkownik nie istnieje";
     }
     // echo($document['_id']);
-    $user_id=$document['_id'];
     // unset($_POST['login']);
     // unset($_POST['password']);
 }
