@@ -4,3 +4,4 @@ vendor/
 # ignores all .md files
 .md
 composer*
+demo.php

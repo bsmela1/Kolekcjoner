@@ -92,7 +92,7 @@ if (isset($_POST['login'])&&isset($_POST['password'])) {
         ]);
         //var_dump($collections);
         foreach ($collections as $document){
-            echo "<a href='show_collection.php'><div class='collection'>".$document['collection_name']."</div></a>";
+            echo "<a href='show_collection.php?id=".$document['_id']."'>"."<div class='collection'>".$document['collection_name']."</div></a>";
         }
     ?>
     </section>
