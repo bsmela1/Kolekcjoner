@@ -25,6 +25,7 @@
 
     <a id="logout-button" href="logout.php">
         <img id="logout-img" src="pictures/logout_icon.png" alt="logout">
+        //zmiana
     </a>
 </nav>
 
