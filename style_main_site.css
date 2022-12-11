@@ -96,3 +96,8 @@ a {
 .fourth-color {
     background: #febe7e;
 }
+.collection {
+    width: 40vw;
+    height: 20vh;
+    background-color: #502831;
+}

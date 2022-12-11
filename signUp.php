@@ -14,7 +14,7 @@
     <label>Hasło</label><input name="password" type="password">
     <label>Potwierdź hasło</label><input name="password2" type="password">
     <input id="submit_input" type="submit" value="Zarejestruj się">
-    <a href="signIn.php">Zaloguj się</a>
+    <a href="index.php">Zaloguj się</a>
 </form>
 </body>
 </html>

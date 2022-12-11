@@ -1,26 +1,33 @@
 <?php
 //strona glowna, z logowaniem
+$user_id="";
+require_once __DIR__ . '/vendor/autoload.php';
+    $client = new MongoDB\Client(
+        'mongodb+srv://admin:qQ2fczxXFqCODj3V@cluster0.ggdvz4i.mongodb.net/?retryWrites=true&w=majority'
+    );
 if (isset($_POST['login'])&&isset($_POST['password'])) {
     $username =$_POST['login'];
     $password = sha1(sha1($_POST['password']));
 
-    require_once __DIR__ . '/vendor/autoload.php';
-    $client = new MongoDB\Client(
-        'mongodb+srv://admin:qQ2fczxXFqCODj3V@cluster0.ggdvz4i.mongodb.net/?retryWrites=true&w=majority'
-    );
+    
     $collection = $client->kolekcjoner->users;
     $document= $collection->findOne([
         'username'=>$username]);
     if ($document!="") {
         if (($document['username'] == $username) && ($document['password'] == $password)) {
-            echo "Witaj " . $username;
+            //echo "Witaj " . $username;
         } else {
-            echo "Błąd logowania. Spróbuj jeszcze raz.";
+            //echo "Błąd logowania. Spróbuj jeszcze raz.";
         }
     }else{
-        echo "Taki użutkownik nie istnieje";
+        //echo "Taki użutkownik nie istnieje";
     }
+    // echo($document['_id']);
+    $user_id=$document['_id'];
+    // unset($_POST['login']);
+    // unset($_POST['password']);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -39,23 +46,56 @@ if (isset($_POST['login'])&&isset($_POST['password'])) {
 <body>  
 
 <nav>
-    <a href="https://ih1.redbubble.net/image.1533663591.5353/ssrco,classic_tee,mens,fafafa:ca443f4786,front_alt,square_product,600x600.jpg">
+    <a href="collections.php">
         <img id="site-icon" src="pictures/unabomber.jpg"  width="100px" height="100px">
     </a>
 
     <section id="menu">
-        <a href="kolekcje.php"><h2>kolekcje.</h2></a>
-        <a href="add_item.php"><h2>wstaw nowy item.</h2></a>
+        <form action="collections.php" method="post">
+            <label for="">Nazwa kolekcji<input type="text" name="collection_name"></label>
+            <label for=""><input type="submit" value="Utwórz kolekcje"></label>
+        </form>
+        <?php
+
+        if(isset($_POST['collection_name'])){
+            require_once __DIR__ . '/vendor/autoload.php';
+    $client = new MongoDB\Client(
+        'mongodb+srv://admin:qQ2fczxXFqCODj3V@cluster0.ggdvz4i.mongodb.net/?retryWrites=true&w=majority'
+    );
+        $collection_name = $_POST['collection_name'];
+
+        //var_dump($collection_name);
+    $collection = $client->kolekcjoner->kolekcje;
+    echo $user_id;
+    $document= $collection->insertOne([
+        'collection_name'=>$collection_name,
+        'user_id'=>$user_id,
+    ]
+    );
+    
+    }
+        ?>
     </section>
 
-    <a id="logout-button" href="logout.php">
+    <a id="logout-button" href="index.php">
         <img id="logout-img" src="pictures/logout_icon.png" alt="logout">
-        //zmiana
     </a>
 </nav>
 
 <main>
-    <section id="cats"></section>
+    <section id="cats">
+    <?php
+    echo $user_id;
+        $collection = $client->kolekcjoner->kolekcje;
+        $collections = $collection->find([
+            'user_id' => strval($user_id)
+        ]);
+        //var_dump($collections);
+        foreach ($collections as $document){
+            echo "<a href='show_collection.php'><div class='collection'>".$document['collection_name']."</div></a>";
+        }
+    ?>
+    </section>
 </main>
 
 </body>
