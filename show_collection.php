@@ -61,19 +61,28 @@
             $array_to_update = [];
 
             //printowanie wszystkihc elementow z tablicy elements
-            foreach ($collections as $value) {
-                $collection_name = $value['collection_name'];
+            foreach ($collections as $collection) {
+                $collection_name = $collection['collection_name'];
                 echo "<h1>$collection_name</h1>";
-                $elements = $value['elements'];
-                $array_len = count($elements);
+                $elements = $collection['elements'];
+                echo "elements: ";
+                var_dump($elements);
+
+                echo "collection: ";
+                var_dump($collection);
+                //$elements_len = count($elements);
                 foreach ($elements as $element) {
                     echo "<a href='show_element.php?id=$collection_id&element=$element'>$element</a>";
                     array_push($array_to_update, $element);
                   }
             };
 
+
             //kod do wstawiania elementow do wybranej kolekcji
-            if(isset($_POST['item_name'])){
+            if(
+                isset($_POST['item_name']) 
+                && $_POST['item_name']!=""
+            ){
                 require_once __DIR__ . '/vendor/autoload.php';
                 $client = new MongoDB\Client(
                     'mongodb+srv://admin:qQ2fczxXFqCODj3V@cluster0.ggdvz4i.mongodb.net/?retryWrites=true&w=majority'
@@ -82,14 +91,20 @@
                 $item_name = $_POST['item_name'];
                 //dodaje element name z inputa:
                 array_push($array_to_update, $item_name);
+                //echo "array to update: ".$array_to_update;
+                var_dump($array_to_update);
 
-                $updateResult = $collection->updateOne(
+                $collection->updateOne(
                     [ '_id' => new MongoDB\BSON\ObjectId("$collection_id") ],
                     [ 
                         '$set' => [ 'elements' => $array_to_update ]
                     ]
                     );
+                //czyszcze array_to_update zeby nie zwiekszala sie wraz z kolejymi update requestami:
+                $array_to_update = [];
+                $_POST = array();
             }
+            $_POST = array();
         ?>
     </main>
 
