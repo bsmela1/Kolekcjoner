@@ -66,7 +66,7 @@ if (isset($_POST['login'])&&isset($_POST['password'])) {
 
         //var_dump($collection_name);
     $collection = $client->kolekcjoner->kolekcje;
-    echo $user_id;
+    //echo $user_id;
     $document= $collection->insertOne([
         'collection_name'=>$collection_name,
         'user_id'=>$user_id,
@@ -86,7 +86,7 @@ if (isset($_POST['login'])&&isset($_POST['password'])) {
 <main id="main">
     <h1>Kolekcje</h1>
     <?php
-    echo $user_id;
+    //echo $user_id;
         $collection_nr = 0;
         $collection = $client->kolekcjoner->kolekcje;
         //sortuje kolekcje od najnowszej kolekcji
