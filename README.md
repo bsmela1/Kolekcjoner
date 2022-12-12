@@ -1,9 +1,6 @@
 # Kolekcjoner
 Apka szkolna madrych ludzi z sci
 
-//test zmiany:
-A se cos pisze pisze se cos lubie pisac elo elo 320323232
-
 Poradnik do php i mongodb
 
 1. Pobieracie najnowszą windowsową DLL z tej strony https://pecl.php.net/package/mongodb (klikacie na ikonkę Windowsa i na dole strony wybieracie wersję php jaką macie i Thread Safe (TS) x64)

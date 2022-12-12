@@ -52,7 +52,7 @@ if (isset($_POST['login'])&&isset($_POST['password'])) {
 
     <section id="menu">
         <form action="collections.php" method="post">
-            <label for="">Nazwa kolekcji<input type="text" name="collection_name"></label>
+            <label for="">NAZWA KOLEKCJI:<input type="text" name="collection_name"></label>
             <label for=""><input type="submit" value="Utwórz kolekcje"></label>
         </form>
         <?php
@@ -83,7 +83,7 @@ if (isset($_POST['login'])&&isset($_POST['password'])) {
     </a>
 </nav>
 
-<main>
+<main id="main">
     <h1>Kolekcje</h1>
     <?php
     echo $user_id;
@@ -99,6 +99,8 @@ if (isset($_POST['login'])&&isset($_POST['password'])) {
         }
     ?>
 </main>
+
+<script src="script.js"></script>
 
 </body>
 </html>

@@ -26,13 +26,12 @@ nav {
     height: 14vh;
     display: inherit;
     flex-direction: row;
-    flex-grow: 1;
     justify-content: space-around;
     align-items: center;
 }
 
 #menu>a {
-    background: rgb(87, 56, 92);
+    background: #57385c;
     border-radius: 8px;
     border: 5px dashed #502831;
     height: 10vh;
@@ -42,6 +41,16 @@ nav {
     padding: 0 50px 2px;
 }
 
+#menu form {
+    width: 70vw;
+    display: flex;
+    justify-content: space-around;
+}
+
+form input[type='submit'] {
+    background-color: #54435a;
+    padding: 0 10px;
+}
 
 #logout-button {
     background-color: #a75265;
@@ -64,7 +73,7 @@ nav {
 main {
     max-width: 100vw;
     min-height: 86vw;
-    background: #57385c;
+    background-color: #fbf3ff;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -77,9 +86,9 @@ a {
 }
 
 main a {
-    width: 25vw;
-    height: 5vw;
-    margin: 20px;
+    width: 15vw;
+    height: 15vw;
+    margin: 2.5vw;
     border: 5px solid rgb(60, 31, 90);
     border-radius: 25px;
     background-color: #a75265;
@@ -99,6 +108,7 @@ main h1 {
     text-transform: uppercase;
     font-style: italic;
     text-shadow: 4px 4px 20px #0c070f;
+    color: #221724;
 }
 
 #login-button {
@@ -119,4 +129,9 @@ main h1 {
 
 .fourth-color {
     background: #febe7e;
+}
+
+form input {
+    margin-left: 10px;
+    border-radius: 6px;
 }
