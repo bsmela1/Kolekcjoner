@@ -69,7 +69,7 @@ if (isset($_POST['login'])&&isset($_POST['password'])) {
     //echo $user_id;
     $document= $collection->insertOne([
         'collection_name'=>$collection_name,
-        'user_id'=>$user_id,
+        'user_id'=>"",
         'elements'=>[],
     ]
     );
@@ -88,6 +88,7 @@ if (isset($_POST['login'])&&isset($_POST['password'])) {
     <?php
     //echo $user_id;
         $collection_nr = 0;
+        $user_id = "";
         $collection = $client->kolekcjoner->kolekcje;
         //sortuje kolekcje od najnowszej kolekcji
         $collections = $collection->find([

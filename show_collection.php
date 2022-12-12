@@ -71,9 +71,11 @@
                 echo "collection: ";
                 var_dump($collection);
                 //$elements_len = count($elements);
+                $i=0;
                 foreach ($elements as $element) {
-                    echo "<a href='show_element.php?id=$collection_id&element=$element'>$element</a>";
+                    echo "<a href='show_element.php?id=$collection_id&element=$i'>$element</a>";
                     array_push($array_to_update, $element);
+                    $i=$i+1;
                   }
             };
 
