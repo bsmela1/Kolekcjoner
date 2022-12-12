@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style_show_collection.css">
+    <link rel="stylesheet" href="style_show_element.css">
     <title>Show collection</title>
 </head>
 <body>
@@ -22,9 +22,11 @@
                 $collection = $client->kolekcjoner->kolekcje;
 
                 $collection_id = strval($_GET['id']);
+                $element_name = strval($_GET['element']);
                 //echo $collection_id;
 
                 // szukanie według kryteriów
+                //do zrobienia wyszukiwanie elementu
                 $criteria = [
                     '_id'=> new MongoDB\BSON\ObjectId("$collection_id"),
                 ];
@@ -42,14 +44,6 @@
             <img id="logo" src="pictures/logo.png">
         </a>
 
-        <?php
-            //otwieram forma z przekierowaniem do tej samej strony
-            echo "<form action='show_collection.php?id=$collection_id' method='post'>" 
-        ?>
-            <label for="item_name">Wstaw do kolekcji:<input type="text" name="item_name"></label>
-            <input id='add-item-submit-button' type="submit" value="Wstaw przedmiot">
-        </form>
-
         <a id="logout-button" href="index.php">
             <img id="logout-img" src="pictures/logout_icon.png" alt="logout">
         </a>
@@ -57,9 +51,6 @@
 
     <main>  
         <?php
-              //tablica do update'a elementow
-            $array_to_update = [];
-
             //printowanie wszystkihc elementow z tablicy elements
             foreach ($collections as $value) {
                 $collection_name = $value['collection_name'];
@@ -67,30 +58,12 @@
                 $elements = $value['elements'];
                 $array_len = count($elements);
                 foreach ($elements as $element) {
-                    echo "<a href='show_element.php?id=$collection_id&element=$element'>$element</a>";
+                    echo "<div><p>$element</p></div>";
                     array_push($array_to_update, $element);
                   }
             };
-
-            //kod do wstawiania elementow do wybranej kolekcji
-            if(isset($_POST['item_name'])){
-                require_once __DIR__ . '/vendor/autoload.php';
-                $client = new MongoDB\Client(
-                    'mongodb+srv://admin:qQ2fczxXFqCODj3V@cluster0.ggdvz4i.mongodb.net/?retryWrites=true&w=majority'
-                );
-
-                $item_name = $_POST['item_name'];
-                //dodaje element name z inputa:
-                array_push($array_to_update, $item_name);
-
-                $updateResult = $collection->updateOne(
-                    [ '_id' => new MongoDB\BSON\ObjectId("$collection_id") ],
-                    [ 
-                        '$set' => [ 'elements' => $array_to_update ]
-                    ]
-                    );
-            }
         ?>
+
     </main>
 
 

@@ -89,9 +89,11 @@ if (isset($_POST['login'])&&isset($_POST['password'])) {
     echo $user_id;
         $collection_nr = 0;
         $collection = $client->kolekcjoner->kolekcje;
+        //sortuje kolekcje od najnowszej kolekcji
         $collections = $collection->find([
-            'user_id' => strval($user_id)
-        ]);
+            'user_id' => strval($user_id),  
+        ], ['sort' => ['_id'=>-1]] 
+        );
         //var_dump($collections);
         foreach ($collections as $document){
             $collection_nr++;

@@ -17,6 +17,7 @@ nav {
     height: 14vh;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     background: #a75265;
 }
@@ -82,7 +83,7 @@ main h1 {
     color: #221724;
 }
 
-main a {
+main div {
     width: 15vw;
     height: 15vw;
     margin: 30px;
