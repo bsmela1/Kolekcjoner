@@ -47,7 +47,7 @@ if (isset($_POST['login'])&&isset($_POST['password'])) {
 
 <nav>
     <a href="collections.php">
-        <img id="site-icon" src="pictures/unabomber.jpg"  width="100px" height="100px">
+        <img id="logo" src="pictures/logo.png">
     </a>
 
     <section id="menu">
@@ -70,6 +70,7 @@ if (isset($_POST['login'])&&isset($_POST['password'])) {
     $document= $collection->insertOne([
         'collection_name'=>$collection_name,
         'user_id'=>$user_id,
+        'elements'=>[],
     ]
     );
     
@@ -83,19 +84,20 @@ if (isset($_POST['login'])&&isset($_POST['password'])) {
 </nav>
 
 <main>
-    <section id="cats">
+    <h1>Kolekcje</h1>
     <?php
     echo $user_id;
+        $collection_nr = 0;
         $collection = $client->kolekcjoner->kolekcje;
         $collections = $collection->find([
             'user_id' => strval($user_id)
         ]);
         //var_dump($collections);
         foreach ($collections as $document){
-            echo "<a href='show_collection.php?id=".$document['_id']."'>"."<div class='collection'>".$document['collection_name']."</div></a>";
+            $collection_nr++;
+            echo "<a href='show_collection.php?id=".$document['_id']."'>"."<p>".$collection_nr.". ".$document['collection_name']."</p></a>";
         }
     ?>
-    </section>
 </main>
 
 </body>

@@ -42,6 +42,7 @@ nav {
     padding: 0 50px 2px;
 }
 
+
 #logout-button {
     background-color: #a75265;
     width: 10vh;
@@ -55,19 +56,19 @@ nav {
     height: 8vh;
 }
 
-#site-icon {
-    object-fit: cover;
-    max-width: 14vw;
-    height: 14vh;
+#logo {
+    width: 9vh;
+    height: 9vh;
 }
-
-
-
 
 main {
     max-width: 100vw;
-    height: 80vw;
+    min-height: 86vw;
     background: #57385c;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly
 }
 
 a {
@@ -75,7 +76,30 @@ a {
     color: black;
 }
 
+main a {
+    width: 25vw;
+    height: 5vw;
+    margin: 20px;
+    border: 5px solid rgb(60, 31, 90);
+    border-radius: 25px;
+    background-color: #a75265;
 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+main h1 {
+    width: 100vw;
+    max-width: 100vw;
+    font-size: 35px;
+    text-align: center;
+    margin: 20px 0;
+    text-transform: uppercase;
+    font-style: italic;
+    text-shadow: 4px 4px 20px #0c070f;
+}
 
 #login-button {
     margin-right: 25px;
@@ -95,9 +119,4 @@ a {
 
 .fourth-color {
     background: #febe7e;
-}
-.collection {
-    width: 40vw;
-    height: 20vh;
-    background-color: #502831;
 }

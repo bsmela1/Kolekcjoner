@@ -4,16 +4,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style_show_collection.css">
     <title>Show collection</title>
 </head>
 <body>
     <nav>
+        <?php
+                require_once __DIR__ . '/vendor/autoload.php';
+
+                $client = new MongoDB\Client(
+                    'mongodb+srv://admin:qQ2fczxXFqCODj3V@cluster0.ggdvz4i.mongodb.net/?retryWrites=true&w=majority'
+                );
+
+                $collection = $client->kolekcjoner->kolekcje;
+
+                $collection_id = strval($_GET['id']);
+                //echo $collection_id;
+
+                // szukanie według kryteriów
+                $criteria = [
+                    '_id'=> new MongoDB\BSON\ObjectId("$collection_id"),
+                ];
+
+                $collections = $collection->find($criteria);
+
+                //stara wersja:
+                //$searched_collection = $collection->findOne([
+                //    '_id'=> new MongoDB\BSON\ObjectId("$collection_id")
+                //]);
+    
+        ?>
+
         <a href="collections.php">
-            <img id="site-icon" src="pictures/unabomber.jpg"  width="100px" height="100px">
+            <img id="logo" src="pictures/logo.png">
         </a>
 
-        <form action="collections.php" method="post">
+        <?php
+            //otwieram forma z przekierowaniem do tej samej strony
+            echo "<form action='show_collection.php?id=$collection_id' method='post'>" 
+        ?>
             <label for="item_name">Wstaw do kolekcji:<input type="text" name="item_name"></label>
             <input id='add-item-submit-button' type="submit" value="Wstaw przedmiot">
         </form>
@@ -25,33 +57,39 @@
 
     <main>  
         <?php
-            require_once __DIR__ . '/vendor/autoload.php';
+              //tablica do update'a elementow
+            $array_to_update = [];
 
-            $client = new MongoDB\Client(
-                'mongodb+srv://admin:qQ2fczxXFqCODj3V@cluster0.ggdvz4i.mongodb.net/?retryWrites=true&w=majority'
-            );
+            //printowanie wszystkihc elementow z tablicy elements
+            foreach ($collections as $value) {
+                $collection_name = $value['collection_name'];
+                echo "<h1>$collection_name</h1>";
+                $elements = $value['elements'];
+                $array_len = count($elements);
+                foreach ($elements as $element) {
+                    echo "<div><p>$element</p></div>";
+                    array_push($array_to_update, $element);
+                  }
+            };
 
-            $collection = $client->kolekcjoner->kolekcje;
+            //kod do wstawiania elementow do wybranej kolekcji
+            if(isset($_POST['item_name'])){
+                require_once __DIR__ . '/vendor/autoload.php';
+                $client = new MongoDB\Client(
+                    'mongodb+srv://admin:qQ2fczxXFqCODj3V@cluster0.ggdvz4i.mongodb.net/?retryWrites=true&w=majority'
+                );
 
-            $collection_id = strval($_GET['id']);
-            //echo $collection_id;
+                $item_name = $_POST['item_name'];
+                //dodaje element name z inputa:
+                array_push($array_to_update, $item_name);
 
-            $searched_collection = $collection->findOne([
-                '_id'=> new MongoDB\BSON\ObjectId("$collection_id")
-            ]);
-
-            //var_dump($searched_collection);
-
-            $collection_name = $searched_collection['collection_name'];
-            echo "<h1>$collection_name</h1>";
-        ?>
-
-
-        <?php
-
-
-
-
+                $updateResult = $collection->updateOne(
+                    [ '_id' => new MongoDB\BSON\ObjectId("$collection_id") ],
+                    [ 
+                        '$set' => [ 'elements' => $array_to_update ]
+                    ]
+                    );
+            }
         ?>
     </main>
 

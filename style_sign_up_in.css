@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
     margin: 0;
     padding: 0;
 }
@@ -45,7 +46,7 @@ input {
     height: 12%;
     background: #453953;
     color: #f3cba5;
-text-align: center;
+    text-align: center;
     font-size: 1.3rem;
 }
 
@@ -53,10 +54,10 @@ text-align: center;
     width: 30%;
     background: #25161b;
     cursor: pointer;
-    transition: .5s ;
+    transition: .5s;
 }
 
-#submit_input:hover{
+#submit_input:hover {
     background: #453953;
 }
 
