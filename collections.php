@@ -2,6 +2,7 @@
 //strona glowna, z logowaniem
 $user_id="";
 require_once __DIR__ . '/vendor/autoload.php';
+//łączenie z bazą
     $client = new MongoDB\Client(
         'mongodb+srv://admin:qQ2fczxXFqCODj3V@cluster0.ggdvz4i.mongodb.net/?retryWrites=true&w=majority'
     );
@@ -86,7 +87,6 @@ if (isset($_POST['login'])&&isset($_POST['password'])) {
 <main id="main">
     <h1>Kolekcje</h1>
     <?php
-    //echo $user_id;
         $collection_nr = 0;
         $user_id = "";
         $collection = $client->kolekcjoner->kolekcje;

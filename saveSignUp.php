@@ -18,4 +18,4 @@ if (isset($_POST['login']) && isset($_POST['password']) && isset($_POST['passwor
     echo "Użytkownik został dodany!";
 }
 ?>
-<a href="signIn.php">Zaloguj się</a>
+<a href="index.php">Zaloguj się</a>

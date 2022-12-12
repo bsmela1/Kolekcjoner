@@ -13,8 +13,8 @@
 <body>
     <nav>
         <?php
-                require_once __DIR__ . '/vendor/autoload.php';
-
+                require_once __DIR__ . '/vendor/autoload.php'; 
+                //łączenie z bazą
                 $client = new MongoDB\Client(
                     'mongodb+srv://admin:qQ2fczxXFqCODj3V@cluster0.ggdvz4i.mongodb.net/?retryWrites=true&w=majority'
                 );
@@ -23,20 +23,6 @@
 
                 $collection_id = strval($_GET['id']);
                 $element_name = strval($_GET['element']);
-                //echo $collection_id;
-
-                // szukanie według kryteriów
-                //do zrobienia wyszukiwanie elementu
-                $criteria = [
-                    '_id'=> new MongoDB\BSON\ObjectId("$collection_id"),
-                ];
-
-                $collections = $collection->find($criteria);
-
-                //stara wersja:
-                //$searched_collection = $collection->findOne([
-                //    '_id'=> new MongoDB\BSON\ObjectId("$collection_id")
-                //]);
     
         ?>
 
@@ -52,16 +38,8 @@
     <main>  
         <?php
             //printowanie wszystkihc elementow z tablicy elements
-            foreach ($collections as $value) {
-                $collection_name = $value['collection_name'];
-                echo "<h1>$collection_name</h1>";
-                $elements = $value['elements'];
-                $array_len = count($elements);
-                foreach ($elements as $element) {
-                    echo "<div><p>$element</p></div>";
-                    array_push($array_to_update, $element);
-                  }
-            };
+            echo "<div>$element_name</div>";
+
         ?>
 
     </main>

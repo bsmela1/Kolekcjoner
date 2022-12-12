@@ -65,17 +65,9 @@
                 $collection_name = $collection['collection_name'];
                 echo "<h1>$collection_name</h1>";
                 $elements = $collection['elements'];
-                echo "elements: ";
-                var_dump($elements);
-
-                echo "collection: ";
-                var_dump($collection);
-                //$elements_len = count($elements);
-                $i=0;
                 foreach ($elements as $element) {
-                    echo "<a href='show_element.php?id=$collection_id&element=$i'>$element</a>";
+                    echo "<a href='show_element.php?id=$collection_id&element=$element'>$element</a>";
                     array_push($array_to_update, $element);
-                    $i=$i+1;
                   }
             };
 
@@ -91,10 +83,12 @@
                 );
 
                 $item_name = $_POST['item_name'];
-                //dodaje element name z inputa:
                 array_push($array_to_update, $item_name);
-                //echo "array to update: ".$array_to_update;
-                var_dump($array_to_update);
+                $client = new MongoDB\Client(
+                    'mongodb+srv://admin:qQ2fczxXFqCODj3V@cluster0.ggdvz4i.mongodb.net/?retryWrites=true&w=majority'
+                );
+
+                $collection = $client->kolekcjoner->kolekcje;
 
                 $collection->updateOne(
                     [ '_id' => new MongoDB\BSON\ObjectId("$collection_id") ],
@@ -106,7 +100,6 @@
                 $array_to_update = [];
                 $_POST = array();
             }
-            $_POST = array();
         ?>
     </main>
 
